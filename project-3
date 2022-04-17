@@ -9,17 +9,24 @@ created_at  datetime ,
 country_code int,
 foreign key(country_code) references countries(code)
 );
+alter table users <users> modify column created_at DateTime default current_timestamp;
+
 create table countries(
 code int (20) primary key,
 name varchar(20)not null unique,
 continent_name varchar(20) not null
 );
+alter table countries <countries> modify column created_at DateTime default current_timestamp;
+
 create table orders(
 id int primary key,
 user_id int foreign key(user_id) references users(id),
 status varchar(6) check (status in ('start','finish')),
 created_at datetime,
 );
+alter table orders <orders> modify column created_at DateTime default current_timestamp;
+
+
 create table order_product(
 order_id int,
 product_id int,
@@ -28,6 +35,8 @@ primary key(order_id, product_id),
 foreign key (order_id) references orders(id),
 foregin key (product_id) references products(id)
 );
+alter table order_product <order_product> modify column created_at DateTime default current_timestamp;
+
 create table products(
 id int primary key
 name varchar(10) not null unique,
@@ -35,6 +44,9 @@ price int default 0,
 status varchar(10) check (status in('valid','expired')),
 created_at datetime
 );
+alter table products <products> modify column created_at DateTime default current_timestamp;
+
+
 
 insert into users values(1,'sami_alsnani','samialsnani@gmail.com','M','15-05-1995','18-06-12 10:34:09','13333');
 insert into countries values('13333','sami','riyadh'); 
